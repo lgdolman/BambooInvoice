@@ -89,17 +89,20 @@ table.stripe td {
 </head>
 <body>
 
-	<table>
+	<table width="100%">
 		<tr>
-			<td width="60%">
-				<p>
-					<strong>
-						<?php echo $this->lang->line('invoice_invoice');?> <?php echo $row->invoice_number;?><br />
-						<?php echo $date_invoice_issued;?>
-					</strong>
-				</p>
-			</td>
-			<td>
+		  <td width="50%"><p> <strong> <?php echo $this->lang->line('invoice_invoice');?> <?php echo $row->invoice_number;?><br />
+		    <?php echo $date_invoice_issued;?> </strong> </p>
+		    <h3> Invoice to <?php echo $row->name;?> </h3>
+		    <p>
+		      <?php if ($row->address1 != '') {echo $row->address1 . '<br />';}?>
+		      <?php if ($row->address2 != '') {echo $row->address2 . '<br />';}?>
+		      <?php if ($row->city != '') {echo $row->city . '<br />';}?>
+		      <?php if ($row->province != '') {echo $row->province . '<br />';}?>
+		      <?php if ($row->postal_code != '') {echo $row->postal_code . '<br />';}?>
+		      <?php if ($row->tax_code != '') {echo $this->lang->line('settings_tax_code').': '.$row->tax_code . '<br />';}?>
+	        </p></td>
+			<td width="50%" style="text-align:right;">
 
 				<h2>
 					<?php if (isset($company_logo)) {echo $company_logo.'<br />';}?>
@@ -108,36 +111,20 @@ table.stripe td {
 				</h2>
 
 				<p>
-					<?php echo $companyInfo->address1;?>
-					<?php if ($companyInfo->address2 != '') {echo '<br />' . $companyInfo->address2;}?><br />
-					<?php echo $companyInfo->city;?>,
-					<?php echo $companyInfo->province;?><br />
-					<?php echo $companyInfo->country;?> 
-					<?php echo $companyInfo->postal_code;?><br />
+					<?php if ($companyInfo->address1 != '') {echo '<br />' . $companyInfo->address1;}?>
+                   <?php if ($companyInfo->address2 != '') {echo '<br />' . $companyInfo->address2;}?>
+                   <?php if ($companyInfo->city != '') {echo '<br />' . $companyInfo->city;}?>
+                    <?php if ($companyInfo->province != '') {echo '<br />' . $companyInfo->province;}?>                    
+                    <?php if ($companyInfo->country != '') {echo '<br />' . $companyInfo->country;}?>                    
+                    <?php if ($companyInfo->postal_code != '') {echo '<br />' . $companyInfo->postal_code;}?>
 					<?php echo auto_link(prep_url($companyInfo->website));?>
 				</p>
 			</td>
 		</tr>
 	</table>
-
-	<h3><?php echo $this->lang->line('invoice_bill_to');?>
-		<?php echo $row->name;?>
-	</h3>
-
-	<p>
-		<?php if ($row->address1 != '') {echo $row->address1;}?>
-		<?php if ($row->address2 != '') {echo ', ' . $row->address2;}?>
-		<?php if ($row->address1 != '' || $row->address2 != '') {echo '<br />';}?>
-		<?php if ($row->city != '') {echo $row->city;}?>
-		<?php if ($row->province != '') {if ($row->city != '') {echo ', ';} echo $row->province;}?>
-		<?php if ($row->country != '') {if ($row->province != '' || ($row->province == '' && $row->city != '')){echo ', ';} echo $row->country;}?>
-		<?php if ($row->postal_code != '') {echo ' ' . $row->postal_code;}?>
-		<?php if ($row->city != '' || $row->province != '' || $row->country != '' || $row->postal_code != '') {echo '<br />';}?>
-		<?php echo auto_link(prep_url($row->website));?>
-		<?php if ($row->tax_code != '') {echo '<br />'.$this->lang->line('settings_tax_code').': '.$row->tax_code;}?>
-	</p>
-
-	<table class="invoice_items stripe">
+<div id=spacer style="height: 20px; width:100%">
+</div>
+<table class="invoice_items stripe">
 		<tr>
 			<th><?php echo $this->lang->line('invoice_quantity');?></th>
 			<th><?php echo $this->lang->line('invoice_work_description');?></th>
@@ -180,13 +167,9 @@ table.stripe td {
 	<?php endif;?>
 
 	<div id="footer">
-		<?php if ($this->settings_model->get_setting('display_branding') == 'y'):?>
-			<p>
-				<?php echo $this->lang->line('invoice_generated_by');?> 
-				<?php echo $this->lang->line('bambooinvoice_logo');?><br />
-				<a href="http://www.bambooinvoice.org/">http://www.bambooinvoice.org</a>
-			</p>
-		<?php endif;?>
+		<p>
+        Invoice powered by BambooTwo
+        </p>
 	</div>
 
 </body>
