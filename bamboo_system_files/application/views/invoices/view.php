@@ -109,27 +109,6 @@ if ($row->amount_paid < $row->total_with_tax):
 	<?php echo form_close();?>
 
 <div class="invoiceViewHold">
-	<div id="companyDetails">
-		<h2>
-			<?php if (isset($company_logo)) {echo $company_logo.'<br />';}?>
-			<?php echo $companyInfo->company_name;?> 
-			<span><?php echo $this->lang->line('invoice_invoice');?></span>
-		</h2>
-
-		<p>
-			<?php if ($companyInfo->address1 != '') {echo $companyInfo->address1;}?>
-			<?php if ($companyInfo->address2 != '') {echo ', ' . $companyInfo->address2;}?>
-			<?php if ($companyInfo->address1 != '' || $companyInfo->address2 != '') {echo '<br />';}?>
-			<?php if ($companyInfo->city != '') {echo $companyInfo->city;}?>
-			<?php if ($companyInfo->province != '') {echo ', ' . $companyInfo->province;}?>
-			<?php if ($companyInfo->country != '') {echo ', ' . $companyInfo->country;}?>
-			<?php if ($companyInfo->postal_code != '') {echo ' ' . $companyInfo->postal_code;}?>
-			<?php if ($companyInfo->city != '' || $companyInfo->province != '' || $companyInfo->country != '' || $companyInfo->postal_code != '') {echo '<br />';}?>
-			<?php echo auto_link(prep_url($companyInfo->website));?>
-		</p>
-
-	</div>
-
 	<p>
 		<strong>
 			<?php echo $this->lang->line('invoice_invoice');?> <?php echo $row->invoice_number;?><br />
@@ -144,18 +123,14 @@ if ($row->amount_paid < $row->total_with_tax):
 	<h3><?php echo $row->name;?></h3>
 
 	<p>
-		<?php if ($row->address1 != '') {echo $row->address1;}?>
-		<?php if ($row->address2 != '') {echo ', ' . $row->address2;}?>
-		<?php if ($row->address1 != '' || $row->address2 != '') {echo '<br />';}?>
-		<?php if ($row->city != '') {echo $row->city;}?>
-		<?php if ($row->province != '') {if ($row->city != '') {echo ', ';} echo $row->province;}?>
-		<?php if ($row->country != '') {if ($row->province != '' || ($row->province == '' && $row->city != '')){echo ', ';} echo $row->country;}?>
-		<?php if ($row->postal_code != '') {echo ' ' . $row->postal_code;}?>
-		<?php if ($row->city != '' || $row->province != '' || $row->country != '' || $row->postal_code != '') {echo '<br />';}?>
-		<?php echo auto_link(prep_url($row->website));?>
-		<?php if ($row->tax_code != '') {echo '<br />'.$this->lang->line('settings_tax_code').': '.$row->tax_code;}?>
+		<?php if ($row->address1 != '')	{echo $row->address1 . ', ';}?>
+		<?php if ($row->address2 != '')	{echo $row->address2 . ', ';}?>
+		<?php if ($row->city != '')	 	{echo $row->city . ', ';}?>
+		<?php if ($row->province != '') 	{echo $row->province . ', ';;}?>
+		<?php if ($row->country != '')  	 {echo $row->country . ', ';;}?>
+		<?php if ($row->postal_code != '') {echo $row->postal_code;;}?>
 	</p>
-
+    
 	<table class="invoice_items stripe">
 		<tr>
 			<th><?php echo $this->lang->line('invoice_quantity');?></th>
